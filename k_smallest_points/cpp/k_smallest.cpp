@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include <unordered_map>
 
 using namespace std;
 
@@ -14,13 +13,17 @@ int get_dist(const point &p) {
 }
 
 vector<point> kSmallest(vector<point> &points, int k) {
+
+	assert(points.size() >= k);
+
 	// Compare points by dist, for sorting
 	auto cmp = [](point &x, point &y) {
 		return get_dist(x) < get_dist(y);
 	};
 
-	// Sort by dist
+	// Partial sort by dist
 	nth_element(points.begin(), points.begin() + k, points.end(), cmp);
+	points.resize(k);	
 
 	return points;
 }
