@@ -16,26 +16,8 @@ class Point:
 	def __str__(self) -> str:
 		return "%d %d" % (self.x, self.y)
 
-@dataclasses.dataclass(order=True) # Generates comparison functions
-class DistPoint:
-	dist: int 
-	point: Point = dataclasses.field(compare=False) # Ignores this field in auto-generated comparison functions
-
-	def __init__(self, point):
-		self.dist = -point.get_dist() # Negate distance, to sort by largest element
-		self.point = point
-
 def kSmallest(points: list[Point], k: int) -> list[Point]:
-	# Point -> distpoints
-	distpoints = [DistPoint(p) for p in points]	
-
-	# Heapify (linear time) and get the k smallest
-	heapq.heapify(distpoints)
-	while len(distpoints) > k:
-		heapq.heappop(distpoints)
-
-	# distpoints -> points
-	return reversed([dp.point for dp in distpoints])
+	return heapq.nsmallest(k, points, key=lambda x: x.get_dist())
 
 # Main entry point
 points = []
