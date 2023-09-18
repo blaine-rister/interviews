@@ -16,7 +16,7 @@ class Point:
 	def __str__(self) -> str:
 		return "%d %d" % (self.x, self.y)
 
-@dataclasses.dataclass(order=True)
+@dataclasses.dataclass(order=True) # Generates comparison functions
 class DistPoint:
 	dist: int 
 	point: Point = dataclasses.field(compare=False) # Ignores this field in auto-generated comparison functions
