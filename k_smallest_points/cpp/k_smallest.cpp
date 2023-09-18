@@ -1,3 +1,6 @@
+/* Given a vector of points, return the k smallest by Euclidean distance. 
+   Use of standard library sorting / data structures is allowed. */
+
 #include <iostream>
 #include <vector>
 #include <unordered_map>
